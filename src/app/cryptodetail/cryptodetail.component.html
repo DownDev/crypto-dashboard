@@ -1,0 +1,9 @@
+<div class="bg-slate-100 dark:bg-gray-800 w-screen h-screen">
+  <ng-container *ngIf="config$ | async as config">
+    <zingchart-angular
+      #chart1
+      [config]="config"
+      class="mx-4"
+    ></zingchart-angular>
+  </ng-container>
+</div>

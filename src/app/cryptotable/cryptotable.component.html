@@ -1,0 +1,115 @@
+<div class="bg-white shadow-lg overflow-hidden dark:bg-gray-900">
+  <ng-container *ngIf="data$ | async as data">
+    <table class="w-full border-collapse font-bold dark:text-gray-300">
+      <thead class="bg-gray-200 dark:bg-gray-700">
+        <tr>
+          <th
+            class="px-6 py-4 text-left font-bold uppercase border-b-2 border-gray-400 dark:border-gray-600"
+          >
+            #
+          </th>
+          <th
+            class="px-6 py-4 text-left font-bold uppercase border-b-2 border-gray-400 dark:border-gray-600"
+          >
+            Name
+          </th>
+          <th
+            class="px-6 py-4 text-right font-bold uppercase border-b-2 border-gray-400 dark:border-gray-600"
+          >
+            Price
+          </th>
+          <th
+            class="px-6 py-4 text-right font-bold uppercase border-b-2 border-gray-400 dark:border-gray-600"
+          >
+            Market Cap
+          </th>
+          <th
+            class="px-6 py-4 text-right font-bold uppercase border-b-2 border-gray-400 dark:border-gray-600"
+          >
+            Volume (24h)
+          </th>
+          <th
+            class="px-6 py-4 text-right font-bold uppercase border-b-2 border-gray-400 dark:border-gray-600"
+          >
+            % Change (24h)
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="
+            let crypto of data | paginate : config;
+            let even = even;
+            let index = index
+          "
+          [ngClass]="{
+            'bg-slate-100 hover:bg-slate-300 dark:hover:bg-gray-700 dark:bg-gray-800':
+              even,
+            'bg-slate-200 hover:bg-slate-400 dark:hover:bg-gray-600 dark:bg-gray-900':
+              !even
+          }"
+          class="cursor-pointer"
+          routerLink="/cryptodetail/{{ crypto.id }}"
+        >
+          <td
+            class="px-6 py-4 whitespace-nowrap border-b border-gray-400 dark:border-gray-600"
+          >
+            {{ index + 1 + (config.currentPage - 1) * config.itemsPerPage }}
+          </td>
+          <td
+            class="px-6 py-4 whitespace-nowrap border-b border-gray-400 dark:border-gray-600"
+          >
+            <div class="flex align-middle gap-4">
+              <img
+                src="https://coinicons-api.vercel.app/api/icon/{{
+                  crypto.symbol.toLowerCase()
+                }}"
+                class="w-6 h-6 my-auto"
+              />
+              <div class="my-auto">{{ crypto.name }}</div>
+              <pre
+                class="text-white p-1 rounded-md"
+                [ngClass]="{
+                  'bg-slate-300 dark:bg-slate-600': even,
+                  'bg-slate-400 dark:bg-slate-700': !even
+                }"
+              ><code class="text-sm font-mono">{{crypto.symbol}}</code></pre>
+            </div>
+          </td>
+          <td
+            class="px-6 py-4 text-right border-b border-gray-400 dark:border-gray-600"
+          >
+            {{ crypto.priceUsd | currency }}
+          </td>
+          <td
+            class="px-6 py-4 text-right border-b border-gray-400 dark:border-gray-600"
+          >
+            {{ crypto.marketCapUsd | currency }}
+          </td>
+          <td
+            class="px-6 py-4 text-right border-b border-gray-400 dark:border-gray-600"
+          >
+            {{ crypto.volumeUsd24Hr | currency }}
+          </td>
+          <td
+            class="px-6 py-4 text-right border-b border-gray-400 dark:border-gray-600"
+            [ngClass]="{
+              'text-green-500 dark:text-green-400':
+                +crypto.changePercent24Hr > 0,
+              'text-red-500 dark:text-red-400': +crypto.changePercent24Hr < 0,
+              'text-gray-500 dark:text-gray-400':
+                +crypto.changePercent24Hr === 0
+            }"
+          >
+            {{ crypto.changePercent24Hr | percent }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="pagination py-4">
+      <pagination-controls
+        (pageChange)="onPageChange($event)"
+      ></pagination-controls>
+    </div>
+  </ng-container>
+</div>

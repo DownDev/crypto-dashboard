@@ -3,16 +3,32 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { SearchbarComponent } from './searchbar/searchbar.component';
+import { FormsModule } from '@angular/forms';
+import { CryptotableComponent } from './cryptotable/cryptotable.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { HttpClientModule } from '@angular/common/http';
+import { CryptodetailComponent } from './cryptodetail/cryptodetail.component';
+import { ZingchartAngularModule } from 'zingchart-angular';
+import { NewsComponent } from './news/news.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SearchbarComponent,
+    CryptotableComponent,
+    CryptodetailComponent,
+    NewsComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    NgxPaginationModule,
+    ZingchartAngularModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

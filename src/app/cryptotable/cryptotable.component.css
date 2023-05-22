@@ -1,0 +1,17 @@
+::ng-deep .ngx-pagination {
+  @apply mx-10 md:mx-44;
+}
+::ng-deep .ngx-pagination li {
+  @apply text-lg rounded;
+}
+::ng-deep .ngx-pagination li:not(.disabled) a {
+  @apply text-blue-600 rounded;
+}
+
+/* Styles for current page */
+::ng-deep .ngx-pagination li.current {
+  @apply bg-blue-600 rounded;
+}
+::ng-deep .ngx-pagination li.current:hover {
+  @apply bg-blue-600 rounded;
+}

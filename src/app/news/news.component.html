@@ -1,0 +1,5 @@
+<ng-container *ngIf="news$ | async as news_arr">
+  <div *ngFor="let news of news_arr">
+    <div>{{ news.title }}</div>
+  </div>
+</ng-container>
