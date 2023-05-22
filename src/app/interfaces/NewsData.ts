@@ -19,4 +19,5 @@ export interface Result {
   category: string[];
   country: string[];
   language: string;
+  expanded: boolean;
 }
