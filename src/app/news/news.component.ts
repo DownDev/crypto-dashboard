@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
-import { Observable,combineLatest } from 'rxjs';
+import { Observable, combineLatest } from 'rxjs';
 import { Result } from '../interfaces/NewsData';
 import { SearchBarService } from '../searchbar.service';
 import { map, switchMap } from 'rxjs/operators';
@@ -12,7 +12,10 @@ import { map, switchMap } from 'rxjs/operators';
 export class NewsComponent implements OnInit {
   news$: Observable<Result[]> | null = null;
 
-  constructor(private apiService: ApiService,private searchBarService: SearchBarService) {}
+  constructor(
+    private apiService: ApiService,
+    private searchBarService: SearchBarService
+  ) {}
 
   ngOnInit(): void {
     console.log('a');
@@ -35,7 +38,6 @@ export class NewsComponent implements OnInit {
       })
     );
   }
-
 
   toggleExpansion(news: Result) {
     news.expanded = !news.expanded;
